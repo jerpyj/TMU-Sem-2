@@ -1,0 +1,1 @@
+{application,segment,[{modules,['Elixir.Segment']},{optional_applications,[]},{applications,[kernel,stdlib,elixir,logger]},{description,"segment"},{registered,[]},{vsn,"0.1.0"}]}.
