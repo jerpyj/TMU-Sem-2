@@ -18,39 +18,82 @@ struct Poly {
 impl ops::Add<Poly> for Poly {
     type Output = Poly;
     fn add(self, other: Poly) -> Poly {
-        // Your + code here
-        Poly{coeffs: Vec::new()}
+        //compare 2 ints and get max for length
+        let max = std::cmp::max(self.coeffs.len(), other.coeffs.len());
+        let mut result = Vec::new();
+
+        for i in 0..max {
+            let x = self.coeffs.get(i).unwrap_or(&0);
+            let y = other.coeffs.get(i).unwrap_or(&0);
+            result.push(x + y);
+        }
+        Poly{coeffs: result}
     }
 }
     
 impl ops::Sub<Poly> for Poly {
     type Output = Poly;
     fn sub(self, other: Poly) -> Poly {
-        // Your - code here	
-        Poly{coeffs: Vec::new()}
+        //compare 2 ints and get max for length
+        let max = std::cmp::max(self.coeffs.len(), other.coeffs.len());
+        let mut result = Vec::new();
+
+        for i in 0..max {
+            let x = self.coeffs.get(i).unwrap_or(&0);
+            let y = other.coeffs.get(i).unwrap_or(&0);
+            result.push(x - y);
+        }
+        Poly{coeffs: result}
     }
 }
     
 impl cmp::PartialEq for Poly {
     fn eq(&self, other: &Self) -> bool {
-        // Your == code here
-        false
+        let max = std::cmp::max(self.coeffs.len(), other.coeffs.len());
+        let mut result = true;
+
+        for i in 0..max {
+            let x = self.coeffs.get(i).unwrap_or(&0);
+            let y = other.coeffs.get(i).unwrap_or(&0);
+            if x != y {
+                result = false;
+            }
+        }
+        result
     }
 }
     
 impl ops::Mul<Poly> for Poly {
     type Output = Poly;
     fn mul(self, other: Poly) -> Poly {
-        // Your * code here
-        Poly{coeffs: Vec::new()}
+        let lenSelf = self.coeffs.len();
+        let lenOther = other.coeffs.len();
+
+        let mut result = vec![0; lenSelf + lenOther - 1];
+
+        for i in 0..lenSelf{
+            for j in 0..lenOther{
+                let x = self.coeffs[i];
+                let y = other.coeffs[j];
+
+                result [i + j] += x * y;
+            }
+        }
+
+        Poly{coeffs: result}
     }
 }
     
 impl ops::Mul<i32> for Poly {
     type Output = Poly;
     fn mul(self, other: i32) -> Poly {
-        // Your * code here
-        Poly{coeffs: Vec::new()}
+        let mut result = Vec::new();
+
+        for i in 0..self.coeffs.len() {
+            let x = self.coeffs[i];
+            result.push(x * other);
+        }
+        Poly{coeffs: result}
     }
 }
     
