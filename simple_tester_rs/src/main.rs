@@ -1,62 +1,60 @@
 #![allow(non_snake_case,non_camel_case_types,dead_code)]
 
-/*
-    Fill in the segment function below. Use as many helpers as you want.
-    Test your code by running 'cargo test' from the tester_rs_simple directory.
-    
-*/
-
 fn segment(start: &(i32,i32), end: &(i32,i32), lines: &[u32]) -> String
 {
-    // Hardcoded solution that passes first test:
+	//get the absolute total length of all the lines as a signed 32 bit integer
+	let absoluteLength: i32 = lines.iter().map(|&x| x as i32).sum();
 
-    if lines.is_empty() {return String::from("");}
+	//create a stack with a vector containing the start x and y, the index of line, the path taken, and the absolute total length of all the lines
+    let mut stack = vec![(start.0, start.1, 0, String::new(), absoluteLength)];
 
-    //check if possible
-    let remainingDistance = (start.0 - end.0).abs() + (start.1 - end.1).abs();
-    let totalDistance = lines.iter().sum();
-    if remainingDistance > totalDistance {return String::from("");}
+	//Create a while loop with patern matching to sort through possible directions
+	while let Some((x, y, idx, path, newLength)) = stack.pop() {
+		
+		// if the end of the lines has been reached
+		if idx == lines.len() {
+			if  (x,y) == *end{
+				return path;
+			}
+			continue; // if not, ignore
+		}
 
-    //check each direction if possible
+		
+		let totalLength = (end.0 - x).abs() + (end.1 - y).abs();
+		//calculate total length left
 
+		//Check if length is even possible
+		if totalLength > newLength {
+			continue;
+		}
+		
+		//set len as the current line length
+		let len = lines[idx] as i32;
 
-    String::from("LLLLD")
+		//new length to represent total distance required left
+		let newerLength = newLength - len;
+
+		//Possible directions left
+		let directions = [
+			('U', x, y + len),
+			('D', x, y - len),
+			('L', x - len, y),
+			('R', x + len, y)
+		];
+		
+		//loop for possible paths
+		for (dirChar, movedX, movedY) in directions{
+			let mut movedPath = path.clone();
+			movedPath.push(dirChar);
+			stack.push((movedX, movedY, idx + 1, movedPath, newerLength));
+
+		}
+
+	}
+    String::new() //Return an empty string
 }
     
 #[cfg(test)]
 #[path = "tests.rs"]
 mod tests;
-
-
-
-/*segmentRecursion: start to: end using: lines
-
-    | remainingDistance totalDistance |
-
-	"Check if lines is an empty collection, if it is, check if start is at the end yet"
-	lines isEmpty ifTrue: [ ^ (start = end) ifTrue: [ '' ] ifFalse: [ nil ] ].
-	
-	"Check if total distance is even possible with provided length"
-	remainingDistance := (start x - end x) abs + (start y - end y) abs.
-	totalDistance := lines sum.
-	remainingDistance > totalDistance ifTrue: [ ^nil ]. "It is not possible to reach whatsoever"
-	
-	"Try each direction if it is possible"
-	#('U' 'D' 'L' 'R') do: [  :direction |
-		| movedPoint result |
-		
-		(direction = 'U') ifTrue: [ movedPoint := start x @ (start y + lines first) ].
-		(direction = 'D') ifTrue: [ movedPoint := start x @ (start y - lines first) ].
-		(direction = 'L') ifTrue: [ movedPoint := (start x - lines first) @ start y ].
-		(direction = 'R') ifTrue: [ movedPoint := (start x + lines first) @ start y ].
-		
-		"Recursively call back to the funtion giving the moved point
-		 as start and the line array exceptfor the first value"
-		result := self segmentRecursion: movedPoint to: end using: lines allButFirst.
-		
-		"Check if if a path was found, if so, connect the direction string to the result string "
-		result ifNotNil: [  ^ direction , result ].
-		
-	 ].
-	^nil! ! */
 

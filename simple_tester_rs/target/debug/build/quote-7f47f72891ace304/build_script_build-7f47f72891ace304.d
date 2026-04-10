@@ -1,5 +1,5 @@
-C:\Users\Jerpy\Documents\GitHub\TMU-Sem-2\simple_tester_rs\target\debug\build\quote-7f47f72891ace304\build_script_build-7f47f72891ace304.d: C:\Users\Jerpy\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\quote-1.0.45\build.rs
+C:\Users\j\Documents\GitHub\TMU-Sem-2\simple_tester_rs\target\debug\build\quote-7f47f72891ace304\build_script_build-7f47f72891ace304.d: C:\Users\j\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\quote-1.0.45\build.rs
 
-C:\Users\Jerpy\Documents\GitHub\TMU-Sem-2\simple_tester_rs\target\debug\build\quote-7f47f72891ace304\build_script_build-7f47f72891ace304.exe: C:\Users\Jerpy\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\quote-1.0.45\build.rs
+C:\Users\j\Documents\GitHub\TMU-Sem-2\simple_tester_rs\target\debug\build\quote-7f47f72891ace304\build_script_build-7f47f72891ace304.exe: C:\Users\j\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\quote-1.0.45\build.rs
 
-C:\Users\Jerpy\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\quote-1.0.45\build.rs:
+C:\Users\j\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\quote-1.0.45\build.rs:
